@@ -1,9 +1,10 @@
 #!/bin/bash
-set -e
 
-# Jalankan migrasi dan seeder ke TiDB/MySQL
-php artisan migrate --force
+# Jalankan migrasi ulang secara bersih, atau abaikan jika tabel sudah ada
+php artisan migrate:fresh --force || php artisan migrate --force
+
+# Masukkan data awal / akun pengguna
 php artisan db:seed --force
 
-# Nyalakan web server Apache
+# Jalankan web server Apache
 exec apache2-foreground
