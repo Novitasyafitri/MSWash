@@ -39,5 +39,9 @@ RUN echo '<VirtualHost *:80>\n\
 
 RUN a2enmod rewrite
 
+# Siapkan script startup untuk migrasi otomatis
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 EXPOSE 80
-CMD ["apache2-foreground"]
+CMD ["entrypoint.sh"]
